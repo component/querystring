@@ -1,7 +1,7 @@
 
 # Query String
 
-  Simple key/value pair query-string parsing.
+  Simple key / value pair query-string parser and formatter.
 
 ## Installation
 
@@ -12,7 +12,7 @@ $ component install component/query-string
 ## Example
 
 ```js
-var parse = require('query-string');
-parse('name=tobi&species=ferret');
+var query = require('query-string');
+query.parse('name=tobi&species=ferret');
 // => { name: 'tobi', species: 'ferret' }
 ```

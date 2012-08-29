@@ -9,7 +9,7 @@
  * @api public
  */
 
-module.exports = function(str){
+exports.parse = function(str){
   if ('string' != typeof str) return {};
   str = str.trim();
   if ('' == str) return {};
