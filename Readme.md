@@ -9,10 +9,28 @@
 $ component install component/query-string
 ```
 
-## Example
+## API
+
+### .parse(string)
+
+  Parse the given query `string`:
 
 ```js
 var query = require('query-string');
 query.parse('name=tobi&species=ferret');
 // => { name: 'tobi', species: 'ferret' }
 ```
+
+### .stringify(object)
+
+  Stringify the given `object`:
+
+```js
+var query = require('query-string');
+query.stringify({ name: 'tobi', species: 'ferret' });
+// => "name=tobi&species=ferret"
+```
+
+## License
+
+  MIT

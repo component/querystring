@@ -1,5 +1,5 @@
 
-// TODO: use trim module
+// TODO: use trim component
 
 /**
  * Parse the given query `str`.
@@ -22,4 +22,13 @@ exports.parse = function(str){
         : decodeURIComponent(parts[1]);
       return obj;
     }, {});
+};
+
+exports.stringify = function(obj){
+  if (!obj) return '';
+  var pairs = [];
+  for (var key in obj) {
+    pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
+  }
+  return pairs.join('&');
 };
