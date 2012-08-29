@@ -24,6 +24,14 @@ exports.parse = function(str){
     }, {});
 };
 
+/**
+ * Stringify the given `obj`.
+ *
+ * @param {Object} obj
+ * @return {String}
+ * @api public
+ */
+
 exports.stringify = function(obj){
   if (!obj) return '';
   var pairs = [];
