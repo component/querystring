@@ -1,0 +1,14 @@
+{
+  "name": "query-string-component",
+  "description": "Simple key/value pair query-string parsing",
+  "version": "0.0.1",
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "component": {
+    "scripts": {
+      "query-string": "index.js"
+    }
+  }
+}
