@@ -1,5 +1,5 @@
 {
-  "name": "query-string",
+  "name": "querystring",
   "description": "Simple key/value pair query-string parsing",
   "keywords": ["query", "querystring", "query-string", "parser"],
   "version": "0.0.1",
