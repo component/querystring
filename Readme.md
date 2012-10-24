@@ -1,4 +1,3 @@
-
 # Query String
 
   Simple key / value pair query-string parser and formatter.
@@ -6,7 +5,7 @@
 ## Installation
 
 ```
-$ component install component/query-string
+$ component install component/querystring
 ```
 
 ## API
@@ -16,7 +15,7 @@ $ component install component/query-string
   Parse the given query `string`:
 
 ```js
-var query = require('query-string');
+var query = require('querystring');
 query.parse('name=tobi&species=ferret');
 // => { name: 'tobi', species: 'ferret' }
 ```
@@ -26,7 +25,7 @@ query.parse('name=tobi&species=ferret');
   Stringify the given `object`:
 
 ```js
-var query = require('query-string');
+var query = require('querystring');
 query.stringify({ name: 'tobi', species: 'ferret' });
 // => "name=tobi&species=ferret"
 ```
