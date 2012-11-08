@@ -1,4 +1,5 @@
-# Query String
+
+# querystring
 
   Simple key / value pair query-string parser and formatter.
 
