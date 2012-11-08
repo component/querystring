@@ -1,5 +1,6 @@
 
-// TODO: use trim component
+var trim = require('trim')
+  , reduce = require('reduce');
 
 /**
  * Parse the given query `str`.
@@ -11,17 +12,15 @@
 
 exports.parse = function(str){
   if ('string' != typeof str) return {};
-  str = str.trim();
+  str = trim(str);
   if ('' == str) return {};
-  return str
-    .split('&')
-    .reduce(function(obj, pair){
-      var parts = pair.split('=');
-      obj[parts[0]] = null == parts[1]
-        ? ''
-        : decodeURIComponent(parts[1]);
-      return obj;
-    }, {});
+  return reduce(str.split('&'), function(obj, pair){
+    var parts = pair.split('=');
+    obj[parts[0]] = null == parts[1]
+      ? ''
+      : decodeURIComponent(parts[1]);
+    return obj;
+  }, {});
 };
 
 /**
