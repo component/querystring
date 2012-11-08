@@ -20,7 +20,7 @@ describe('.stringify(obj)', function(){
 
   describe('when an object is given', function(){
     it('should return a query-string', function(){
-      expect((query.stringify({ name: 'tobi', species: 'ferret' }))
+      expect(query.stringify({ name: 'tobi', species: 'ferret' }))
         .to.eql('name=tobi&species=ferret');
     })
 
