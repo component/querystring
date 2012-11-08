@@ -1,7 +1,11 @@
 
-test:
-	@./node_modules/.bin/mocha \
-		--require should \
-		--reporter spec
+build: index.js components
+	@component build --dev
 
-.PHONY: test
+components:
+	@component install --dev
+
+clean:
+	rm -fr build components
+
+.PHONY: clean
