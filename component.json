@@ -1,5 +1,6 @@
 {
   "name": "querystring",
+  "version": "1.0.0",
   "description": "Simple key/value pair query-string parsing",
   "keywords": [
     "query",
@@ -7,7 +8,6 @@
     "query-string",
     "parser"
   ],
-  "version": "0.0.1",
   "scripts": [
     "index.js"
   ],

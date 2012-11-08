@@ -1,7 +1,7 @@
 {
   "name": "query-string-component",
   "description": "Simple key/value pair query-string parsing",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "devDependencies": {
     "mocha": "*",
     "should": "*"
