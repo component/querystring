@@ -1,4 +1,8 @@
 
+/**
+ * Module dependencies.
+ */
+
 var trim = require('trim')
   , reduce = require('reduce');
 
