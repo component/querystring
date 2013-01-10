@@ -2,6 +2,10 @@
   "name": "query-string-component",
   "description": "Simple key/value pair query-string parsing",
   "version": "1.0.0",
+  "dependencies": {
+    "reduce": "git://github.com/RedVentures/reduce.git",
+    "trim": "0.0.1"
+  },
   "devDependencies": {
     "mocha": "*",
     "should": "*"
