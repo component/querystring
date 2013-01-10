@@ -3,7 +3,7 @@
   "description": "Simple key/value pair query-string parsing",
   "version": "1.0.0",
   "dependencies": {
-    "reduce": "git://github.com/RedVentures/reduce.git",
+    "reduce": "0.0.1",
     "trim": "0.0.1"
   },
   "devDependencies": {
