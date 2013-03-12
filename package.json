@@ -1,5 +1,5 @@
 {
-  "name": "query-string-component",
+  "name": "querystring-component",
   "description": "Simple key/value pair query-string parsing",
   "version": "1.0.0",
   "devDependencies": {
@@ -8,7 +8,7 @@
   },
   "component": {
     "scripts": {
-      "query-string": "index.js"
+      "querystring": "index.js"
     }
   }
 }
