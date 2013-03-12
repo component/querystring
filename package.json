@@ -2,6 +2,9 @@
   "name": "querystring-component",
   "description": "Simple key/value pair query-string parsing",
   "version": "1.0.0",
+  "dependencies": {
+    "trim": "*"
+  },
   "devDependencies": {
     "mocha": "*",
     "should": "*"
