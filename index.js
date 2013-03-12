@@ -3,8 +3,7 @@
  * Module dependencies.
  */
 
-var trim = require('trim')
-  , reduce = require('reduce');
+var trim = require('trim');
 
 /**
  * Parse the given query `str`.
@@ -16,15 +15,20 @@ var trim = require('trim')
 
 exports.parse = function(str){
   if ('string' != typeof str) return {};
+
   str = trim(str);
   if ('' == str) return {};
-  return reduce(str.split('&'), function(obj, pair){
-    var parts = pair.split('=');
+
+  var obj = {};
+  var pairs = str.split('&');
+  for (var i = 0; i < pairs.length; i++) {
+    var parts = pairs[i].split('=');
     obj[parts[0]] = null == parts[1]
       ? ''
       : decodeURIComponent(parts[1]);
-    return obj;
-  }, {});
+  }
+
+  return obj;
 };
 
 /**

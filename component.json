@@ -12,7 +12,6 @@
     "index.js"
   ],
   "dependencies": {
-    "component/trim": "*",
-    "redventures/reduce": "*"
+    "component/trim": "*"
   }
 }
