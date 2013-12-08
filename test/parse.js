@@ -29,4 +29,11 @@ describe('.parse(str)', function(){
       expect(obj).to.eql({ name: 'tobi', species: 'ferret' });
     })
   })
+
+  describe('when the string includes a question-mark', function(){
+    it('should remove the question-mark', function(){
+      var obj = query.parse('?name=tobi&species=ferret');
+      expect(obj).to.eql({ name: 'tobi', species: 'ferret' });
+    })
+  })
 })
