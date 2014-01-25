@@ -4,6 +4,7 @@
  */
 
 var trim = require('trim');
+var type = require('type');
 
 /**
  * Parse the given query `str`.
@@ -14,7 +15,7 @@ var trim = require('trim');
  */
 
 exports.parse = function(str){
-  if ('string' != typeof str) return {};
+  if (type(str) != 'string') return {};
 
   str = trim(str).replace(/^\?/, '');
   if ('' == str) return {};
@@ -70,7 +71,7 @@ exports.parse = function(str){
        * otherwise just set key=value
        */
 
-      if (obj[key] && obj[key].push) {
+      if (type(obj[key]) == 'array') {
         obj[key].push(val);
       } else if (obj.hasOwnProperty(key)) {
         obj[key] = [obj[key], val];
@@ -115,12 +116,12 @@ exports.stringify = function(obj){
  */
 
 function parameterize(key, val, push){
-  if (Object.prototype.toString.call(val) == '[object Array]') {
+  if (type(val) == 'array') {
     for (var i = 0; i < val.length; i++) {
-      if (/\[\]$/.test(val[i])) push([key, obj[key]]);
-      parameterize(key + '[' + (typeof val[i] === 'object' ? i : '') + ']', val[i], push);
+      if (/\[\]$/.test(val[i])) push(key, obj[key]);
+      parameterize(key + '[' + (type(val[i]) == 'object' ? i : '') + ']', val[i], push);
     }
-  } else if (typeof val === 'object') {
+  } else if (type(val) == 'object') {
     var item;
     for (item in val) {
       parameterize(key + '[' + item + ']', val[item], push);
