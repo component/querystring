@@ -5,6 +5,7 @@ describe('.parse(str)', function(){
   describe('when the string is empty', function(){
     it('should return {}', function(){
       expect(query.parse('')).to.eql({});
+      expect(query.parse('    ')).to.eql({});
     })
   })
 
@@ -26,6 +27,13 @@ describe('.parse(str)', function(){
   describe('when values are present', function(){
     it('should parse map the key / value pairs', function(){
       var obj = query.parse('name=tobi&species=ferret');
+      expect(obj).to.eql({ name: 'tobi', species: 'ferret' });
+    })
+  })
+
+  describe('when strings are padded', function(){
+    it('should parse normally', function(){
+      var obj = query.parse('   name=tobi&species=ferret    ');
       expect(obj).to.eql({ name: 'tobi', species: 'ferret' });
     })
   })
@@ -69,13 +77,37 @@ describe('.parse(str)', function(){
     })
 
     it('should parse complex trees', function() {
-      var obj = query.parse('people[tobi][boring]=false&people[tobi][hobbies][]=birdwatching&people[tobi][hobbies][]=archery&people[toby][boring]=true&people[toby][hobbies][]');
+      var obj = query.parse('people[tobi][boring]=false'
+                          + '&people[tobi][hobbies][]=birdwatching'
+                          + '&people[tobi][hobbies][]=archery'
+                          + '&people[toby][boring]=true'
+                          + '&people[toby][hobbies][]');
       expect(obj).to.eql({
         people: {
           tobi: { boring: 'false', hobbies: ['birdwatching', 'archery'] },
           toby: { boring: 'true', hobbies: [''] }
         }
       });
+    })
+  })
+
+  describe('when parsing malicious querystrings', function() {
+    it('should not manipulate prototypes', function() {
+      var obj = query.parse('toString=noop&attack[toString]=noop');
+      expect(obj.toString).to.be.a(Function);
+      expect(obj.attack.toString).to.be.a(Function);
+    })
+
+    it('should not manipulate the prototypal chain', function() {
+      var obj = query.parse('constructor[prototype][toString]=noop');
+      expect(obj.constructor.prototype.toString).to.be.a(Function);
+      expect(Object.prototype.toString).to.be.a(Function);
+    })
+
+    it('should not add to the Object prototype', function() {
+      query.parse('constructor[prototype][attack]=noop');
+      query.parse('attack[constructor][prototype][attack]=noop');
+      expect(Object.prototype.attack).to.be(undefined);
     })
   })
 })
