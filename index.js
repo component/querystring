@@ -52,13 +52,13 @@ exports.parse = function(str){
       var cur = obj;
       for (var j = 0; j <= lastKeyPos; j++) {
         key = keys[j] === '' ? cur.length : keys[j];
-        if (j === lastKeyPos) {
+        if (j === lastKeyPos && !cur[key]) {
           cur[key] = val;
-        } else if (cur[key]) {
+        } else if (cur.hasOwnProperty(key)) {
           cur = cur[key];
-        } else {
+        } else if (!cur[key]) {
           cur = cur[key] = keys[j + 1] && isNaN(keys[j + 1]) ? {} : [];
-        }
+        } else break;
       }
     } else {
 
@@ -72,9 +72,9 @@ exports.parse = function(str){
 
       if (obj[key] && obj[key].push) {
         obj[key].push(val);
-      } else if (obj[key] !== undefined) {
+      } else if (obj.hasOwnProperty(key)) {
         obj[key] = [obj[key], val];
-      } else {
+      } else if (!obj[key]) {
         obj[key] = val;
       }
     }
