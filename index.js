@@ -94,8 +94,38 @@ exports.parse = function(str){
 exports.stringify = function(obj){
   if (!obj) return '';
   var pairs = [];
-  for (var key in obj) {
-    pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
+  var key, val;
+  for (key in obj) {
+    parameterize(key, obj[key], push);
   }
   return pairs.join('&');
+  function push (key, val) {
+    pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(val));
+  }
 };
+
+/**
+ * recurses over object keys and values,
+ * coding paths as querystring parameters
+ *
+ * @param {String} key
+ * @param {Mixed} val
+ * @param {Function} push
+ * @api private
+ */
+
+function parameterize(key, val, push){
+  if (Object.prototype.toString.call(val) == '[object Array]') {
+    for (var i = 0; i < val.length; i++) {
+      if (/\[\]$/.test(val[i])) push([key, obj[key]]);
+      parameterize(key + '[' + (typeof val[i] === 'object' ? i : '') + ']', val[i], push);
+    }
+  } else if (typeof val === 'object') {
+    var item;
+    for (item in val) {
+      parameterize(key + '[' + item + ']', val[item], push);
+    }
+  } else {
+    push(key, val);
+  }
+}
