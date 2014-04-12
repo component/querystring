@@ -3,7 +3,10 @@
  * Module dependencies.
  */
 
+var encode = encodeURIComponent;
+var decode = decodeURIComponent;
 var trim = require('trim');
+var type = require('type');
 
 /**
  * Parse the given query `str`.
@@ -24,9 +27,18 @@ exports.parse = function(str){
   var pairs = str.split('&');
   for (var i = 0; i < pairs.length; i++) {
     var parts = pairs[i].split('=');
+    var key = decode(parts[0]);
+    var m;
+
+    if (m = /(\w+)\[(\d+)\]/.exec(key)) {
+      obj[m[1]] = obj[m[1]] || [];
+      obj[m[1]][m[2]] = decode(parts[1]);
+      continue;
+    }
+
     obj[parts[0]] = null == parts[1]
       ? ''
-      : decodeURIComponent(parts[1]);
+      : decode(parts[1]);
   }
 
   return obj;
@@ -43,8 +55,19 @@ exports.parse = function(str){
 exports.stringify = function(obj){
   if (!obj) return '';
   var pairs = [];
+
   for (var key in obj) {
-    pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
+    var value = obj[key];
+
+    if ('array' == type(value)) {
+      for (var i = 0; i < value.length; ++i) {
+        pairs.push(encode(key + '[' + i + ']') + '=' + encode(value[i]));
+      }
+      continue;
+    }
+
+    pairs.push(encode(key) + '=' + encode(obj[key]));
   }
+
   return pairs.join('&');
 };

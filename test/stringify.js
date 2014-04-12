@@ -29,4 +29,11 @@ describe('.stringify(obj)', function(){
         .to.eql('some%20thing=something%20else')
     })
   })
+
+  describe('when object with arrays is given', function(){
+    it('should return a querystring', function(){
+      expect(query.stringify({ items: [1, 2, 3], key: 'b' }))
+        .to.eql('items%5B0%5D=1&items%5B1%5D=2&items%5B2%5D=3&key=b');
+    })
+  })
 })

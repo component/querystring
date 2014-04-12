@@ -36,4 +36,11 @@ describe('.parse(str)', function(){
       expect(obj).to.eql({ name: 'tobi', species: 'ferret' });
     })
   })
+
+  describe('when querystring array is given', function(){
+    it('should parse as array', function(){
+      var obj = query.parse('items%5B0%5D=1&items%5B1%5D=2&items%5B2%5D=3&key=a');
+      expect(obj).to.eql({ items: [1, 2, 3], key: 'a' });
+    })
+  })
 })
