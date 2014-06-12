@@ -1,5 +1,10 @@
 
-1.3.0 / 2014-04-14 
+1.3.1 / 2014-06-12
+==================
+
+ * rename npm package to component-querystring
+
+1.3.0 / 2014-04-14
 ==================
 
  * add array support
