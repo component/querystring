@@ -14,5 +14,8 @@
       "querystring": "index.js"
     }
   },
-  "repository": "component/querystring"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/component/querystring.git"
+  }
 }
