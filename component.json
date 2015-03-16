@@ -13,7 +13,7 @@
     "index.js"
   ],
   "dependencies": {
-    "component/trim": "*",
-    "component/type": "*"
+    "component/trim": "0.0.1",
+    "component/type": "1.1.0"
   }
 }
