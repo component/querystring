@@ -1,4 +1,12 @@
 
+1.3.2 / 2015-03-16
+==================
+
+  * package: fix browserify build, add missing "component-type" dep
+  * package: fix "repository" field
+  * component: update deps
+  * pin deps and float devDeps with `~`
+
 1.3.1 / 2014-06-12
 ==================
 
