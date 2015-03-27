@@ -8,6 +8,8 @@ var decode = decodeURIComponent;
 var trim = require('trim');
 var type = require('type');
 
+var pattern = /(\w+)\[(\d+)\]/
+
 /**
  * Parse the given query `str`.
  *
@@ -30,7 +32,7 @@ exports.parse = function(str){
     var key = decode(parts[0]);
     var m;
 
-    if (m = /(\w+)\[(\d+)\]/.exec(key)) {
+    if (m = pattern.exec(key)) {
       obj[m[1]] = obj[m[1]] || [];
       obj[m[1]][m[2]] = decode(parts[1]);
       continue;
