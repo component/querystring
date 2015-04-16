@@ -8,7 +8,7 @@ var decode = decodeURIComponent;
 var trim = require('trim');
 var type = require('type');
 
-var pattern = /(\w+)\[(\d+)\]/
+var pattern = /(\w+)\[(\d+)\]/;
 
 /**
  * Parse the given query `str`.
