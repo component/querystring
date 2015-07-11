@@ -3,12 +3,42 @@
  * Module dependencies.
  */
 
-var encode = encodeURIComponent;
-var decode = decodeURIComponent;
 var trim = require('trim');
 var type = require('type');
 
 var pattern = /(\w+)\[(\d+)\]/
+
+/**
+ * Safely encode the given string
+ * 
+ * @param {String} str
+ * @return {String}
+ * @api private
+ */
+
+var encode = function(str) {
+  try {
+    return encodeURIComponent(str);
+  } catch (e) {
+    return str;
+  }
+};
+
+/**
+ * Safely decode the string
+ * 
+ * @param {String} str
+ * @return {String}
+ * @api private
+ */
+
+var decode = function(str) {
+  try {
+    return decodeURIComponent(str.replace(/\+/g, ' '));
+  } catch (e) {
+    return str;
+  }
+}
 
 /**
  * Parse the given query `str`.
