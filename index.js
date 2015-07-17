@@ -6,7 +6,7 @@
 var trim = require('trim');
 var type = require('type');
 
-var pattern = /(\w+)\[(\d+)\]/
+var pattern = /(\w+)\[(\d+)\]/;
 
 /**
  * Safely encode the given string
