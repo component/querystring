@@ -16,6 +16,12 @@ describe('.parse(str)', function(){
     })
   })
 
+  describe('when a querystring value with spaces encoded as "+" is passed', function(){
+    it('should decode them to spaces', function(){
+      expect(query.parse('?names=friends+and+family')).to.eql({ names: 'friends and family' });
+    })
+  })
+
   describe('when values are omitted', function(){
     it('should default values to ""', function(){
       var obj = query.parse('name&species');
