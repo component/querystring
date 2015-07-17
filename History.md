@@ -1,4 +1,10 @@
 
+2.0.0 / 2015-07-17
+==================
+
+  * respect `+`-encoded spaces in `#parse()` (#14, @sperand-io)
+  * wrap `encodeURIComponent` and `decodeURIComponent` in `try/catch` (#14, @sperand-io)
+
 1.3.3 / 2015-03-28
 ==================
 
