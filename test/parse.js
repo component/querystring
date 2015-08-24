@@ -49,4 +49,21 @@ describe('.parse(str)', function(){
       expect(obj).to.eql({ items: [1, 2, 3], key: 'a' });
     })
   })
+
+  describe('when querystring dot notation is given', function () {
+    it('should parse as object', function(){
+      var obj = query.parse('trip.flight.time=6%3A30%20PM&trip.hotel.name=Four%20Seasons');
+      expect(obj).to.eql({ trip: { flight: { time: '6:30 PM' }, hotel: { name: 'Four Seasons' } } });
+    })
+
+    it('should not override existing properties', function(){
+      var obj = query.parse('height=120&height.minimum=60&height.maximum=180');
+      expect(obj).to.eql({ height: 120 });
+    })
+
+    it('should not parse empty properties', function(){
+      var obj = query.parse('movie...showtime=9%20PM');
+      expect(obj).to.eql({ 'movie...showtime': '9 PM' });
+    })
+  })
 })

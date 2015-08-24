@@ -6,7 +6,8 @@
 var trim = require('trim');
 var type = require('type');
 
-var pattern = /(\w+)\[(\d+)\]/;
+var arrayRegex = /(\w+)\[(\d+)\]/;
+var objectRegex = /\w+\.\w+/;
 
 /**
  * Safely encode the given string
@@ -60,11 +61,36 @@ exports.parse = function(str){
   for (var i = 0; i < pairs.length; i++) {
     var parts = pairs[i].split('=');
     var key = decode(parts[0]);
-    var m;
+    var m, ctx, prop;
 
-    if (m = pattern.exec(key)) {
+    if (m = arrayRegex.exec(key)) {
       obj[m[1]] = obj[m[1]] || [];
       obj[m[1]][m[2]] = decode(parts[1]);
+      continue;
+    }
+
+    if (m = objectRegex.test(key)) {
+      m = key.split('.');
+      ctx = obj;
+      
+      while (m.length) {
+        prop = m.shift();
+
+        if (!prop.length) continue;
+
+        if (!ctx[prop]) {
+          ctx[prop] = {};
+        } else if (ctx[prop] && typeof ctx[prop] !== 'object') {
+          break;
+        }
+
+        if (!m.length) {
+          ctx[prop] = decode(parts[1]);
+        }
+
+        ctx = ctx[prop];
+      }
+
       continue;
     }
 
