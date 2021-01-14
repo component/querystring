@@ -3,7 +3,7 @@
   "description": "Simple key/value pair query-string parsing",
   "version": "2.0.0",
   "dependencies": {
-    "trim": "0.0.1",
+    "trim": "1.0.0",
     "component-type": "1.1.0"
   },
   "browser": {
