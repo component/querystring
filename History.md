@@ -1,4 +1,10 @@
 
+2.0.1 / 2021-02-02
+==================
+
+  * Bumped trim to 1.0.0 to resolve [CVE-2020-7753](https://snyk.io/vuln/SNYK-JS-TRIM-1017038)
+  * add semicolon
+
 2.0.0 / 2015-07-17
 ==================
 
