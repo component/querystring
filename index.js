@@ -61,6 +61,8 @@ exports.parse = function(str){
     var parts = pairs[i].split('=');
     var key = decode(parts[0]);
     var m;
+    // Sanitize keys to uppercase to mitigate client-side prototype pollution
+    key && ["__proto__", "constructor", "prototype"].includes(key.toLowerCase()) ? key.toUpperCase() : key
 
     if (m = pattern.exec(key)) {
       obj[m[1]] = obj[m[1]] || [];
