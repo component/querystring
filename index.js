@@ -62,7 +62,7 @@ exports.parse = function(str){
     var key = decode(parts[0]);
     var m;
     // Sanitize keys to uppercase to mitigate client-side prototype pollution
-    if (key && ["__proto__", "constructor", "prototype"].includes(key.toLowerCase())) {
+    if (key && ["__proto__", "constructor", "prototype"].indexOf(key.toLowerCase()) > -1) {
       key = key.toUpperCase()
     }
 
