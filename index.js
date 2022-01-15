@@ -41,6 +41,22 @@ var decode = function(str) {
 }
 
 /**
+ * Ensure any potential prototype pollution can be sanitized.
+ *
+ * @param {String} str
+ * @return {String}
+ * @api public
+ */
+
+var sanitizeObjKey = function(str) {
+  if (str && ["__proto__", "constructor", "prototype"].indexOf(str.toLowerCase()) > -1) {
+    return str.toUpperCase()
+  }
+
+  return str;
+}
+
+/**
  * Parse the given query `str`.
  *
  * @param {String} str
@@ -59,20 +75,17 @@ exports.parse = function(str){
   var pairs = str.split('&');
   for (var i = 0; i < pairs.length; i++) {
     var parts = pairs[i].split('=');
-    var key = decode(parts[0]);
+    var key = sanitizeObjKey(decode(parts[0]));
     var m;
-    // Sanitize keys to uppercase to mitigate client-side prototype pollution
-    if (key && ["__proto__", "constructor", "prototype"].indexOf(key.toLowerCase()) > -1) {
-      key = key.toUpperCase()
-    }
 
     if (m = pattern.exec(key)) {
-      obj[m[1]] = obj[m[1]] || [];
-      obj[m[1]][m[2]] = decode(parts[1]);
+      var objectKey = sanitizeObjKey(m[1])
+      obj[objectKey] = obj[objectKey] || [];
+      obj[objectKey][m[2]] = decode(parts[1]);
       continue;
     }
 
-    obj[parts[0]] = null == parts[1]
+    obj[key] = null == parts[1]
       ? ''
       : decode(parts[1]);
   }
